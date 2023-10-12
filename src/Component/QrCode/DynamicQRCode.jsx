@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import QRCode from "qrcode.react";
 
 const DynamicQRCode = () => {
-  const [data, setData] = useState("initial_data"); // Initial data for the QR code
+  const [data, setData] = useState("https://protfolio-bb50e.web.app/"); // Initial data for the QR code
   const [exp, setExp] = useState(false);
-  const [expirationTime, setExpirationTime] = useState(100); // 5 minutes in seconds
+  const [expirationTime, setExpirationTime] = useState(300); // 5 minutes in seconds
   const [intervalId, setIntervalId] = useState(null);
 
   // Function to convert seconds to a time string
   const secondsToTime = (seconds) => {
     if (seconds < 0) {
-      return "Expired";
+      return "QR Code Time Expired Please Refresh The Page";
     }
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
@@ -27,7 +27,8 @@ const DynamicQRCode = () => {
         // The QR code has expired
         setExp(true);
         clearInterval(intervalId);
-        console.log("QR Code Expired");
+        console.log("QR Code Expired",data);
+
       }
     };
 
@@ -40,16 +41,20 @@ const DynamicQRCode = () => {
   }, [expirationTime]);
 
   return (
-    <div>
+    <div className="flex justify-center flex-col items-center w-full h-[100vh] bg-[#141B3D] text-white font-serif">
       <h2>Dynamic QR Code with 5-Minute Time Limit</h2>
-      <p>Remaining Time: {secondsToTime(expirationTime)}</p>
+      <p className="mt-10 mb-6">
+        Remaining Time: {secondsToTime(expirationTime)}
+      </p>
       {exp ? (
         <>
-          <div className="">QR code has expired</div>
+          <div className="">QR code is expired</div>
         </>
       ) : (
         <>
-          <QRCode value={data} />
+          <div className=" bg-[#1B234D] shadow-xl p-20 ">
+            <QRCode value={data} />
+          </div>
         </>
       )}
     </div>

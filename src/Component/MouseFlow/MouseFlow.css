@@ -1,0 +1,23 @@
+
+.circle {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #3498db;
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    transition:all 0.4s ;
+}
+
+
+.circle2 {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(15, 151, 214);
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    transition:all 0.2s ;
+    top:15px;
+    left:15px
+}
